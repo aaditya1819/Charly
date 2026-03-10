@@ -93,10 +93,13 @@ def get_jailbreak_prompt():
 
 def call_api(user_input, config):
     try:
+        # Sanitize the API Key to prevent 401 errors from accidental spaces/quotes
+        clean_key = str(config['api_key']).strip().replace('"', '').replace("'", "")
+        
         headers = {
-            "Authorization": f"Bearer {config['api_key']}",
-            "HTTP-Referer": "https://github.com/hexsecteam/charly-ai",
-            "X-Title": "CHARLY Web",
+            "Authorization": f"Bearer {clean_key}",
+            "HTTP-Referer": "https://charly-ai.streamlit.app",
+            "X-Title": "CHARLY AI",
             "Content-Type": "application/json"
         }
         
