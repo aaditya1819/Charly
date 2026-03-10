@@ -1,5 +1,5 @@
 {
-  "api_key": "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",
+  "api_key": "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",
   "base_url": "https://openrouter.ai/api/v1",
   "model": "arcee-ai/trinity-large-preview:free",
   "language": "English"

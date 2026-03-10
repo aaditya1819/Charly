@@ -193,9 +193,12 @@ def call_api(user_input):
         pass
     
     try:
+        # Sanitize the API Key to prevent 401 errors from accidental spaces/quotes
+        clean_key = str(config['api_key']).strip().replace('"', '').replace("'", "")
+        
         headers = {
-            "Authorization": f"Bearer {config['api_key']}",
-            "HTTP-Referer": SITE_URL,
+            "Authorization": f"Bearer {clean_key}",
+            "HTTP-Referer": "https://charly-ai.streamlit.app",
             "X-Title": SITE_NAME,
             "Content-Type": "application/json"
         }
