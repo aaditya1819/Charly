@@ -55,14 +55,28 @@ window.onresize = () => { canvas.width = window.innerWidth; canvas.height = wind
 # --- Logic Layer ---
 
 def load_config():
+    # Priority 1: Streamlit Secrets (for permanent cloud deployment)
+    if "api_key" in st.secrets:
+        key = st.secrets["api_key"]
+    else:
+        key = ""
+
     if os.path.exists(CONFIG_FILE):
         try:
             with open(CONFIG_FILE, "r") as f:
-                return json.load(f)
+                cfg = json.load(f)
+                if not key: key = cfg.get("api_key", "")
+                return {
+                    "api_key": key,
+                    "base_url": cfg.get("base_url", "https://openrouter.ai/api/v1"),
+                    "model": cfg.get("model", "arcee-ai/trinity-large-preview:free"),
+                    "language": cfg.get("language", "English")
+                }
         except:
-            return {}
+            pass
+            
     return {
-        "api_key": "",
+        "api_key": key,
         "base_url": "https://openrouter.ai/api/v1",
         "model": "arcee-ai/trinity-large-preview:free",
         "language": "English"
