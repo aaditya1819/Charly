@@ -41,8 +41,9 @@ class colors:
     bold = "\033[1m"
 
 # Configuration
-CONFIG_FILE = "wormgpt_config.json"
-PROMPT_FILE = "system-prompt.txt"  # 🧩 Local system prompt file
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CONFIG_FILE = os.path.join(BASE_DIR, "wormgpt_config.json")
+PROMPT_FILE = os.path.join(BASE_DIR, "system-prompt.txt")  # 🧩 Local system prompt file
 DEFAULT_API_KEY = ""
 DEFAULT_BASE_URL = "https://openrouter.ai/api/v1"
 DEFAULT_MODEL = "deepseek/deepseek-chat-v3-0324:free"
